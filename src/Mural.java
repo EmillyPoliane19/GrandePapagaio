@@ -16,7 +16,10 @@ public class Mural {
         return "Usuário " + usuario.getNome() + " criado com sucesso";
     }
 
-    public Usuario logarUsuario(String nomeLogin) {
+    public Usuario logarUsuario(String nomeLogin) throws Exception{
+        if (!usuariosAtivos.contains(nomeLogin)) {
+            throw new Exception("Usuário não existe!");
+        }
 
         for (Usuario usuario : usuariosAtivos) {
             if (usuario.getNome().equalsIgnoreCase(nomeLogin)) {

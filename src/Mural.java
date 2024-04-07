@@ -10,6 +10,10 @@ public class Mural {
         this.usuariosAtivos = new ArrayList<>();
     }
 
+    public List<Usuario> getUsuariosAtivos() {
+        return usuariosAtivos;
+    }
+
     public String criarUsuarios(Usuario usuario) {
         usuariosAtivos.add(usuario);
 
@@ -28,12 +32,12 @@ public class Mural {
     }
 
     public String postarNoMural (Usuario usuario, String post) {
-        usuario.criarPost(post);
-        if (!usuario.getPosts().isEmpty()) {
+        if (getUsuariosAtivos().contains(usuario)) {
+            usuario.criarPost(post);
             return "Post realizado com sucesso no mural de " + usuario.getNome();
-        } else {
-            return "Usuário inválido";
         }
+
+        return "Usuário inválido";
     }
 
     public String seguirUsuarios(Usuario usuarioAtual, String usuarioSeguir) {

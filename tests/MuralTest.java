@@ -25,7 +25,7 @@ class MuralTest {
 
     /* Testa se o método logarUsuario retorna o usuário correto com base no nome de login fornecido.*/
     @Test
-    public void testLogarUsuario() {
+    public void testLogarUsuario() throws Exception {
         mural.criarUsuarios(usuario2);
 
         Usuario usuarioEncontrado = mural.logarUsuario("Maria");

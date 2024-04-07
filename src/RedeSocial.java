@@ -32,54 +32,51 @@ public class RedeSocial {
             } else if (opcao == LOGAR_NA_CONTA) {
                 System.out.println("Digite seu nome:");
                 nomeUsuario = sc.nextLine();
+                try {
+                    Usuario usuarioAtual = mural.logarUsuario(nomeUsuario);
+                    if (usuarioAtual.getNome().equalsIgnoreCase(nomeUsuario)) {
+                        System.out.println("Usuário Encontrado!");
 
-                Usuario usuarioAtual = mural.logarUsuario(nomeUsuario);
+                        do {
+                            menuOpcoes();
+                            opcao = sc.nextInt();
+                            sc.nextLine();
 
-                if (usuarioAtual.getNome().equalsIgnoreCase(nomeUsuario
-                )) {
-                    System.out.println("Usuário Encontrado!");
+                            switch (opcao) {
+                                case CRIAR_POST:
+                                    System.out.println("Digite seu post:");
+                                    String post = sc.nextLine();
 
-                    do {
-                        menuOpcoes();
-                        opcao = sc.nextInt();
-                        sc.nextLine();
+                                    String adicionaPost = mural.postarNoMural(usuarioAtual, post);
+                                    System.out.println(adicionaPost);
 
-                        switch (opcao) {
-                            case CRIAR_POST:
-                                System.out.println("Digite seu post:");
-                                String post = sc.nextLine();
+                                    break;
 
-                                String adicionaPost = mural.postarNoMural(usuarioAtual, post);
-                                System.out.println(adicionaPost);
+                                case SEGUIR_USUARIO:
+                                    System.out.println("Digite o nome do usuário:");
+                                    String seguirUsuario = sc.nextLine();
 
-                                break;
+                                    String seguir = mural.seguirUsuarios(usuarioAtual, seguirUsuario);
+                                    System.out.println(seguir);
+                                    break;
 
-                            case SEGUIR_USUARIO:
-                                System.out.println("Digite o nome do usuário:");
-                                String seguirUsuario = sc.nextLine();
+                                case EXIBIR_MURAL:
+                                    StringBuilder exibir = mural.lerMural(usuarioAtual);
+                                    System.out.println(exibir);
+                                    break;
 
-                                String seguir = mural.seguirUsuarios(usuarioAtual, seguirUsuario);
-                                System.out.println(seguir);
-                                break;
+                                case 4:
+                                    System.out.println("Você saiu da sua conta.");
+                                    usuarioAtual = null;
+                                    break;
+                            }
 
-                            case EXIBIR_MURAL:
-                                StringBuilder exibir = mural.lerMural(usuarioAtual);
-                                System.out.println(exibir);
-                                break;
-
-                            case 4:
-                                System.out.println("Você saiu da sua conta.");
-                                usuarioAtual = null;
-                                break;
-                        }
-
-                    } while (opcao != 4);
-
-                } else {
-                    System.out.println("Usuário não encontrado!");
+                        } while (opcao != 4);
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
             }
-
         } while (opcao != 3);
     }
     public static void menuInicial() {

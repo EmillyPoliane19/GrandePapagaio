@@ -1,4 +1,5 @@
 **Projeto de uma rede social simples que utilize os paradigmas orietados a objetos**
+
 **Descrição da atividade:**
 
 Você foi contratado(a) para desenvolver o software da rede social GrandePapagaio. Essa rede social tem as seguintes funcionalidades:
